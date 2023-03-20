@@ -7,6 +7,9 @@ on:
     types:
       - completed
 
+permissions:
+  contents: write
+
 jobs:
   release:
     name: Release
@@ -15,6 +18,8 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: version
         run: echo "::set-output name=version::$(cat VERSION)"
         id: version
