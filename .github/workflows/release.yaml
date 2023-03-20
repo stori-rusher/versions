@@ -8,7 +8,7 @@ on:
       - completed
 
 jobs:
-  build_release:
+  release:
     name: Release
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
@@ -16,7 +16,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
       - name: version
-        run: cat VERSION
+        run: echo "::set-output name=version::$(cat VERSION)"
         id: version
       - name: release
         uses: softprops/action-gh-release@v1
